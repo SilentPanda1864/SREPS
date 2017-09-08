@@ -12,7 +12,7 @@ using SRePs.Models;
 
 namespace SRePs.Controllers
 {
-    [Authorize]
+    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -72,6 +72,7 @@ namespace SRePs.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+        
 
         //
         // POST: /Account/Login

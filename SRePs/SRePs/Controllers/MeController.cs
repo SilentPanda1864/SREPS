@@ -14,7 +14,7 @@ using SRePs.Models;
 
 namespace SRePs.Controllers
 {
-    [Authorize]
+    
     public class MeController : ApiController
     {
         private ApplicationUserManager _userManager;
@@ -44,7 +44,11 @@ namespace SRePs.Controllers
         public GetViewModel Get()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            return new GetViewModel() { Hometown = user.Hometown };
+            if (user != null)
+            {
+                return new GetViewModel() { Hometown = user.Hometown != null ? user.Hometown : "" };
+            }
+            return new GetViewModel() { Hometown = "" };
         }
     }
 }
