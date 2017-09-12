@@ -12,7 +12,7 @@ using SRePs.Models;
 
 namespace SRePs.Controllers
 {
-    
+    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
