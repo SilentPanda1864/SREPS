@@ -38,7 +38,7 @@ namespace SRePs
                 "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                 "~/Content/bootstrap.css",
+                 "~/Content/bootstrap-flatly.css",
                  "~/Content/Site.css"));
         }
     }

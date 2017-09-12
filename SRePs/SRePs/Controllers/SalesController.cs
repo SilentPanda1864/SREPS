@@ -17,12 +17,14 @@ namespace SRePs.Controllers
         private SREPSDBEntities db = new SREPSDBEntities();
 
         // GET: Sales
+        [Route("sales/all")]
         public IQueryable<SalesData> GetSalesDatas()
         {
             return db.SalesData;
         }
 
-        // GET: Sales/5
+        // GET: Sales/id
+        [Route("sales/{id}")]
         [ResponseType(typeof(SalesData))]
         public IHttpActionResult GetSalesData(string id)
         {
@@ -36,7 +38,7 @@ namespace SRePs.Controllers
         }
 
         // PUT: Sales/5
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(void)), Route("sales/{id}")]
         public IHttpActionResult PutSalesData(string id, SalesData salesData)
         {
             if (id != salesData.Sales_ID)
@@ -66,7 +68,7 @@ namespace SRePs.Controllers
         }
 
         // POST: Sales
-        [ResponseType(typeof(SalesData))]
+        [ResponseType(typeof(SalesData)), Route("sales")]
         public IHttpActionResult PostSalesData(SalesData salesData)
         {
             db.SalesData.Add(salesData);
@@ -91,7 +93,8 @@ namespace SRePs.Controllers
         }
 
         // DELETE: Sales/5
-        [ResponseType(typeof(SalesData))]
+
+        [ResponseType(typeof(SalesData)), Route("sales/{id}")]
         public IHttpActionResult DeleteSalesData(string id)
         {
             SalesData salesData = db.SalesData.Find(id);

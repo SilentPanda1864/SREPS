@@ -14,7 +14,6 @@ using SRePs.Models;
 
 namespace SRePs.Controllers
 {
-    [Authorize]
     public class MeController : ApiController
     {
         private ApplicationUserManager _userManager;
