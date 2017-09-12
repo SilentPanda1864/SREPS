@@ -8,7 +8,7 @@ using SREPSDataAccess;
 
 namespace SRePs.Controllers
 {
-    public class ProductController : ApiController
+    public class ProductsController : ApiController
     {
         //Get all products
         public List<StockData> Get()
