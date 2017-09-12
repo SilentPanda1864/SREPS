@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Web
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRePs", "SRePs\SRePs.csproj", "{F45BF371-5F49-4E5A-BE66-D5AD594EA382}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SREPSDataAccess", "SREPSDataAccess\SREPSDataAccess.csproj", "{85DFE5AE-3795-4FEF-973D-93A69E3B263B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{F45BF371-5F49-4E5A-BE66-D5AD594EA382}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F45BF371-5F49-4E5A-BE66-D5AD594EA382}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F45BF371-5F49-4E5A-BE66-D5AD594EA382}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85DFE5AE-3795-4FEF-973D-93A69E3B263B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85DFE5AE-3795-4FEF-973D-93A69E3B263B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85DFE5AE-3795-4FEF-973D-93A69E3B263B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85DFE5AE-3795-4FEF-973D-93A69E3B263B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C952731B-AFE9-4502-B5EB-2C3BC9A8B727}
 	EndGlobalSection
 EndGlobal
