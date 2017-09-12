@@ -12,39 +12,39 @@ using SREPSDataAccess;
 
 namespace SRePs.Controllers
 {
-    public class SalesController : ApiController
+    public class StockController : ApiController
     {
         private SREPSDBEntities db = new SREPSDBEntities();
 
-        // GET: Sales
-        public IQueryable<SalesData> GetSalesDatas()
+        // GET: Stock
+        public IQueryable<StockData> GetStockDatas()
         {
-            return db.SalesData;
+            return db.StockData;
         }
 
-        // GET: Sales/5
-        [ResponseType(typeof(SalesData))]
-        public IHttpActionResult GetSalesData(string id)
+        // GET: Stock/5
+        [ResponseType(typeof(StockData))]
+        public IHttpActionResult GetStockData(string id)
         {
-            SalesData salesData = db.SalesData.Find(id);
-            if (salesData == null)
+            StockData stockData = db.StockData.Find(id);
+            if (stockData == null)
             {
                 return NotFound();
             }
 
-            return Ok(salesData);
+            return Ok(stockData);
         }
 
-        // PUT: Sales/5
+        // PUT: Stock/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSalesData(string id, SalesData salesData)
+        public IHttpActionResult PutStockData(string id, StockData stockData)
         {
-            if (id != salesData.Sales_ID)
+            if (id != stockData.Product_ID)
             {
                 return BadRequest();
             }
 
-            db.Entry(salesData).State = EntityState.Modified;
+            db.Entry(stockData).State = EntityState.Modified;
 
             try
             {
@@ -52,7 +52,7 @@ namespace SRePs.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SalesDataExists(id))
+                if (!StockDataExists(id))
                 {
                     return NotFound();
                 }
@@ -65,11 +65,11 @@ namespace SRePs.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: Sales
-        [ResponseType(typeof(SalesData))]
-        public IHttpActionResult PostSalesData(SalesData salesData)
+        // POST: Stock
+        [ResponseType(typeof(StockData))]
+        public IHttpActionResult PostStockData(StockData stockData)
         {
-            db.SalesData.Add(salesData);
+            db.StockData.Add(stockData);
 
             try
             {
@@ -77,7 +77,7 @@ namespace SRePs.Controllers
             }
             catch (DbUpdateException)
             {
-                if (SalesDataExists(salesData.Sales_ID))
+                if (StockDataExists(stockData.Product_ID))
                 {
                     return Conflict();
                 }
@@ -87,23 +87,23 @@ namespace SRePs.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = salesData.Sales_ID }, salesData);
+            return CreatedAtRoute("DefaultApi", new { id = stockData.Product_ID }, stockData);
         }
 
-        // DELETE: Sales/5
-        [ResponseType(typeof(SalesData))]
-        public IHttpActionResult DeleteSalesData(string id)
+        // DELETE: Stock/5
+        [ResponseType(typeof(StockData))]
+        public IHttpActionResult DeleteStockData(string id)
         {
-            SalesData salesData = db.SalesData.Find(id);
-            if (salesData == null)
+            StockData stockData = db.StockData.Find(id);
+            if (stockData == null)
             {
                 return NotFound();
             }
 
-            db.SalesData.Remove(salesData);
+            db.StockData.Remove(stockData);
             db.SaveChanges();
 
-            return Ok(salesData);
+            return Ok(stockData);
         }
 
         protected override void Dispose(bool disposing)
@@ -115,9 +115,9 @@ namespace SRePs.Controllers
             base.Dispose(disposing);
         }
 
-        private bool SalesDataExists(string id)
+        private bool StockDataExists(string id)
         {
-            return db.SalesData.Count(e => e.Sales_ID == id) > 0;
+            return db.StockData.Count(e => e.Product_ID == id) > 0;
         }
     }
 }
