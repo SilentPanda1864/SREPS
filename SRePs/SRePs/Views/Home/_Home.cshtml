@@ -13,11 +13,11 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search for..."/>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-success" type="button"><span class="glyphicon glyphicon-plus" /></button>
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#addReportModal" type="button"><span class="glyphicon glyphicon-plus" /></button>
                                 </span>
                             </div>
                         </div>
-                   </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,6 +28,38 @@
                     Placeholder Text
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="addReportModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <div class="title-group">
+                        <h4 class="modal-title">Add new sales report</h4>
+                        <button type="button" id="addNewProduct" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+                   </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-control-label" for="inputProductName">Product Name</label>
+                            <input id="inputProductName" class="form-control"type="text" name="productName" value=""/>
+                        </div>
+                        <div class="col-md-6 move-left">
+                            <label class="form-control-label" for="inputAmountSold">Amount Sold</label>
+                            <input id="inputAmountSold"class="form-control"type="number" name="amountSold" value="0"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class ="btn btn-primary">Add report</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
