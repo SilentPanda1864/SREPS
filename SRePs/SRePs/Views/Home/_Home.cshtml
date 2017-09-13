@@ -1,5 +1,4 @@
-﻿<!-- ko with: home -->
-<div class="container">
+﻿<div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="search">
@@ -16,6 +15,20 @@
                                     <button class="btn btn-success" data-toggle="modal" data-target="#addReportModal" type="button"><span class="glyphicon glyphicon-plus" /></button>
                                 </span>
                             </div>
+                            <br />
+                                <span data-bind="if: salesRecords().length == 0 && salesRecords() != null">No data to display!</span>
+                                <table data-bind="if: salesRecords().length > 0 && salesRecords() != null">
+                                    <tbody data-bind="foreach: salesRecords">
+                                    <tr>
+                                        <td data-bind="text: Sales_Id"></td>
+                                        <td>
+                                            <button class="btn btn-info glyphicon glyphicon-eye-open"></button>
+                                            <button class="btn btn-default glyphicon glyphicon-pencil"></button>
+                                            <button class="btn btn-danger glyphicon glyphicon-trash"></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                         </div>
                     </div>
                 </div>
@@ -63,5 +76,3 @@
         </div>
     </div>
 </div>
-
-<!-- /ko -->
