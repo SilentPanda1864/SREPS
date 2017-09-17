@@ -1,7 +1,8 @@
 ﻿$(function () {
 	app.initialize();
 
-	// Activate Knockout
+	// Activate 
+
 	ko.validation.init({ grouping: { observable: false } });
 	ko.applyBindings(app);
 });

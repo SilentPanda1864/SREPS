@@ -6,8 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="37e11cf4d86a4b6fa553f670792c52a9" Name="Diagram1">
         <EntityTypeShape EntityType="SREPSDBModel.SalesData" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SREPSDBModel.StockData" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="SREPSDBModel.FK__SalesData__Produ__25869641" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SREPSDBModel.StockData" PointX="0.75" PointY="1.125" Width="1.5" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

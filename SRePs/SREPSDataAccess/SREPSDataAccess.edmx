@@ -4,14 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SREPSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SREPSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="SalesData">
           <Key>
             <PropertyRef Name="Sales_ID" />
+            <PropertyRef Name="Product_Name" />
           </Key>
-          <Property Name="Sales_ID" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Product_ID" Type="varchar" MaxLength="15" />
-          <Property Name="Amount_Sold" Type="int" />
+          <Property Name="Sales_ID" Type="int" Nullable="false" />
+          <Property Name="Product_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount_Sold" Type="int" Nullable="false" />
           <Property Name="Date_Sold" Type="date" />
           <Property Name="Time_Sold" Type="time" Precision="7" />
         </EntityType>
@@ -19,74 +20,40 @@
           <Key>
             <PropertyRef Name="Product_ID" />
           </Key>
-          <Property Name="Product_ID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Product_ID" Type="int" Nullable="false" />
           <Property Name="Product_Name" Type="varchar" MaxLength="30" />
           <Property Name="Stock_Level" Type="int" />
         </EntityType>
-        <Association Name="FK__SalesData__Produ__25869641">
-          <End Role="StockData" Type="Self.StockData" Multiplicity="0..1" />
-          <End Role="SalesData" Type="Self.SalesData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StockData">
-              <PropertyRef Name="Product_ID" />
-            </Principal>
-            <Dependent Role="SalesData">
-              <PropertyRef Name="Product_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SREPSDBModelStoreContainer">
           <EntitySet Name="SalesData" EntityType="Self.SalesData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockData" EntityType="Self.StockData" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__SalesData__Produ__25869641" Association="Self.FK__SalesData__Produ__25869641">
-            <End Role="StockData" EntitySet="StockData" />
-            <End Role="SalesData" EntitySet="SalesData" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SREPSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="SalesData">
           <Key>
             <PropertyRef Name="Sales_ID" />
+            <PropertyRef Name="Product_Name" />
           </Key>
-          <Property Name="Sales_ID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Product_ID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Amount_Sold" Type="Int32" />
+          <Property Name="Sales_ID" Type="Int32" Nullable="false" />
+          <Property Name="Amount_Sold" Type="Int32" Nullable="false" />
           <Property Name="Date_Sold" Type="DateTime" Precision="0" />
           <Property Name="Time_Sold" Type="Time" Precision="7" />
-          <NavigationProperty Name="StockData" Relationship="Self.FK__SalesData__Produ__25869641" FromRole="SalesData" ToRole="StockData" />
+          <Property Name="Product_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="StockData">
           <Key>
             <PropertyRef Name="Product_ID" />
           </Key>
-          <Property Name="Product_ID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Product_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Product_ID" Nullable="false" Type="Int32" />
+          <Property Name="Product_Name" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="Stock_Level" Type="Int32" />
-          <NavigationProperty Name="SalesDatas" Relationship="Self.FK__SalesData__Produ__25869641" FromRole="StockData" ToRole="SalesData" />
         </EntityType>
-        <Association Name="FK__SalesData__Produ__25869641">
-          <End Role="StockData" Type="Self.StockData" Multiplicity="0..1" />
-          <End Role="SalesData" Type="Self.SalesData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StockData">
-              <PropertyRef Name="Product_ID" />
-            </Principal>
-            <Dependent Role="SalesData">
-              <PropertyRef Name="Product_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SREPSDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="SalesDatas" EntityType="Self.SalesData" />
           <EntitySet Name="StockDatas" EntityType="Self.StockData" />
-          <AssociationSet Name="FK__SalesData__Produ__25869641" Association="Self.FK__SalesData__Produ__25869641">
-            <End Role="StockData" EntitySet="StockDatas" />
-            <End Role="SalesData" EntitySet="SalesDatas" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -97,8 +64,8 @@
           <EntitySetMapping Name="SalesDatas">
             <EntityTypeMapping TypeName="SREPSDBModel.SalesData">
               <MappingFragment StoreEntitySet="SalesData">
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
                 <ScalarProperty Name="Sales_ID" ColumnName="Sales_ID" />
-                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
                 <ScalarProperty Name="Amount_Sold" ColumnName="Amount_Sold" />
                 <ScalarProperty Name="Date_Sold" ColumnName="Date_Sold" />
                 <ScalarProperty Name="Time_Sold" ColumnName="Time_Sold" />
@@ -129,7 +96,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

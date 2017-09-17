@@ -31,6 +31,10 @@ namespace SRePs
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Routes.MapHttpRoute(
+                name: "salesApi",
+                routeTemplate: "api/{controller}/{sales_ID}/{product_name}"
+            );
         }
     }
 }

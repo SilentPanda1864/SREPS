@@ -12,7 +12,9 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search for..."/>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-success" data-toggle="modal" data-target="#addReportModal" type="button"><span class="glyphicon glyphicon-plus" /></button>
+                                    <span data-toggle="tooltip" data-placement="bottom" title="Add a new sales report">
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#addReportModal"type="button"><span class="glyphicon glyphicon-plus"/></button>
+                                    </span>
                                 </span>
                             </div>
                             <br />
@@ -20,7 +22,7 @@
                                 <table data-bind="if: salesRecords().length > 0 && salesRecords() != null">
                                     <tbody data-bind="foreach: salesRecords">
                                     <tr>
-                                        <td data-bind="text: Sales_Id"></td>
+                                        <td data-bind="text: sales_ID"></td>
                                         <td>
                                             <button class="btn btn-info glyphicon glyphicon-eye-open"></button>
                                             <button class="btn btn-default glyphicon glyphicon-pencil"></button>
@@ -52,23 +54,23 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <div class="title-group">
                         <h4 class="modal-title">Add new sales report</h4>
-                        <button type="button" id="addNewProduct" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+                        <button type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new item" id="addNewProduct" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
                    </div>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-control-label" for="inputProductName">Product Name</label>
-                            <input id="inputProductName" class="form-control"type="text" name="productName" value=""/>
+                            <input id="inputProductName" class="form-control"type="text" name="productName"/>
                         </div>
                         <div class="col-md-6 move-left">
                             <label class="form-control-label" for="inputAmountSold">Amount Sold</label>
-                            <input id="inputAmountSold"class="form-control"type="number" name="amountSold" value="0"/>
+                            <input id="inputAmountSold" class="form-control"type="number" name="amountSold" value="1"/>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class ="btn btn-primary">Add report</button>
+                    <button data-bind="click: buildArray" type="submit" class ="btn btn-primary">Add report</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>

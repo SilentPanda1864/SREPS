@@ -14,12 +14,11 @@ namespace SREPSDataAccess
     
     public partial class SalesData
     {
-        public string Sales_ID { get; set; }
-        public string Product_ID { get; set; }
-        public Nullable<int> Amount_Sold { get; set; }
+        public List<SalesData> saleData { get; set; }
+        public int Sales_ID { get; set; }
+        public int Amount_Sold { get; set; }
         public Nullable<System.DateTime> Date_Sold { get; set; }
         public Nullable<System.TimeSpan> Time_Sold { get; set; }
-    
-        public virtual StockData StockData { get; set; }
+        public string Product_Name { get; set; }
     }
 }
