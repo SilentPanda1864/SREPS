@@ -34,10 +34,7 @@ $(document).ready(function() {
 		//Posting data
 		self.saleData = ko.observableArray();
 		self.addNewReport = function () {
-			var mapping = {
-				'ignore': ["salesRecords"]
-			}
-			var json = ko.mapping.toJSON(self.saleData(), mapping);
+			var json = ko.toJSON(self.saleData());
 			console.log(json);
 			$.ajax({
 				url: "http://localhost:63251/api/salesdata",
