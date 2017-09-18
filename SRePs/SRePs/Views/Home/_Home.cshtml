@@ -19,18 +19,24 @@
                             </div>
                             <br />
                                 <span data-bind="if: salesRecords().length == 0 && salesRecords() != null">No data to display.</span>
-                                <table data-bind="if: salesRecords().length > 0 && salesRecords() != null">
-                                    <tbody data-bind="foreach: salesRecords">
-                                    <tr>
-                                        <td data-bind="text: sales_ID"></td>
-                                        <td>
-                                            <button class="btn btn-info glyphicon glyphicon-eye-open"></button>
-                                            <button class="btn btn-default glyphicon glyphicon-pencil"></button>
-                                            <button class="btn btn-danger glyphicon glyphicon-trash"></button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                            <table class="table table-striped"data-bind="if: salesRecords().length > 0 && salesRecords() != null">
+                                <thead>
+                                    <th>Sales ID</th>
+                                    <th>Actions</th>
+                                </thead>
+                                <tbody data-bind="foreach: ids">
+                                <tr>
+                          
+                                    <td data-bind="text: $data"></td>
+                                    <td>
+                                        <button class="btn btn-info glyphicon glyphicon-eye-open"></button>
+                                        <button class="btn btn-default glyphicon glyphicon-pencil"></button>
+                                        <button class="btn btn-danger glyphicon glyphicon-trash"></button>
+                                    </td>
+                                    
+                                </tr>
+                                </tbody>
+                            </table >
                         </div>
                     </div>
                 </div>
@@ -54,6 +60,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <div class="title-group">
                         <h4 class="modal-title">Add new sales report</h4>
+                        <input type="hidden" id="salesIdholder" value="" />
                         <button type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new item" id="addNewProduct" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
                    </div>
                 </div>

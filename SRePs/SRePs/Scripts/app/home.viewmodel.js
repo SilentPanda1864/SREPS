@@ -15,21 +15,37 @@ $(document).ready(function() {
 				'<div class="row"><div class="col-md-6"><label class="form-control-label" for="inputProductName">Product Name</label><input id="inputProductName"' +
 				'data-bind=\'value: productName' +
 				x +
-				'\' class="form-control" type="text" name="productName"/></div><div class="col-md-6 move-left"><label class="form-control-label" for="inputAmountSold">Amount Sold</label><input id="inputAmountSold" class="form-control" type="number" name="amountSold" value="0" /></div></div >'); //add input box
+				'\' class="form-control" type="text" name="productName"/></div><div class="col-md-4 move-left"><label class="form-control-label" for="inputAmountSold">Amount Sold</label><input id="inputAmountSold" class="form-control" type="number" name="amountSold" value="1" /></div><div class="col-md-2"><button type="button" class="remove_field btn btn-danger glyphicon glyphicon-trash" style="margin-top:24px;"></div></div >'); //add input box
 			x++; //text box increment
 		}
 	});
+	$(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+		e.preventDefault(); $(this).parent().parent().remove();
+	})
 });
 
 	function SalesModel() {
 		var self = this;
 		//Getting data
 		self.salesRecords = ko.observableArray();
-		$.getJSON("api/salesdata",
-			function(data) {
-				self.salesRecords(data);
+		self.ids = ko.observableArray();
+		self.getData = function() {
+			$.getJSON("api/salesdata",
+				function (data) {
+					self.salesRecords(data);
+					var family = data, ids = [...new Set(family.map(a => a.sales_ID))];
+					self.ids(ids);
 
-			});
+					if (data.length == 0) {
+						$('#salesIdholder').val(1);
+					} else {
+						var lastitemId = data[data.length - 1]["sales_ID"];
+						$('#salesIdholder').val(lastitemId+1);
+					}
+
+				});
+		}
+		self.getData();
 
 		//Posting data
 		self.saleData = ko.observableArray();
@@ -50,7 +66,7 @@ $(document).ready(function() {
 			});
 		};
 		buildArray = function () {
-			var sales_id = 1;
+			var sales_id = $('#salesIdholder').val();
 			var names = $('.modal-body input[type="text"]');
 			var amounts = $('.modal-body input[type="number"]');
 			if (names.length >= 1) {
@@ -60,6 +76,8 @@ $(document).ready(function() {
 				}
 			}
 			self.addNewReport();
+			self.getData();
+			//TODO: update modal elements
 		}
 
 	}

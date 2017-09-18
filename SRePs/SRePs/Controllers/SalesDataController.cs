@@ -25,10 +25,10 @@ namespace SRePs.Controllers
 
         // GET: api/SalesData/5
         [ResponseType(typeof(SalesData))]
-        public IHttpActionResult GetSalesData(int sales_id, string product_name)
+        public IHttpActionResult GetSalesData(int id)
         {
-            SalesData salesData = db.SalesData.Find(sales_id, product_name);
-            if (salesData == null)
+            IEnumerable<SalesData> salesData = db.SalesData.Where(e => e.Sales_ID == id);
+            if (salesData.Any())
             {
                 return NotFound();
             }
