@@ -29,6 +29,7 @@ $(document).ready(function() {
 		//Getting data
 		self.salesRecords = ko.observableArray();
 		self.ids = ko.observableArray();
+		self.individualSale = ko.observableArray();
 		self.getData = function() {
 			$.getJSON("api/salesdata",
 				function (data) {
@@ -45,6 +46,14 @@ $(document).ready(function() {
 
 				});
 		}
+		//viewing data
+		self.getDataFromId = function (id) {
+			$.getJSON("api/salesdata/"+id,
+				function (data) {
+					self.individualSale(data);
+					console.log(self.individualSale());
+				});
+		}
 		self.getData();
 
 		//Posting data
@@ -53,7 +62,7 @@ $(document).ready(function() {
 			var json = ko.toJSON(self.saleData());
 			console.log(json);
 			$.ajax({
-				url: "http://localhost:63251/api/salesdata",
+				url: "api/salesdata",
 				type: "POST",
 				data: json,
 				contentType: "application/json; charset=utf-8",

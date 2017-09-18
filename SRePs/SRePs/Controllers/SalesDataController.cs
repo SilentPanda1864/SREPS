@@ -28,7 +28,7 @@ namespace SRePs.Controllers
         public IHttpActionResult GetSalesData(int id)
         {
             IEnumerable<SalesData> salesData = db.SalesData.Where(e => e.Sales_ID == id);
-            if (salesData.Any())
+            if (salesData.Count() == 0)
             {
                 return NotFound();
             }
@@ -127,13 +127,13 @@ namespace SRePs.Controllers
         [ResponseType(typeof(SalesData))]
         public IHttpActionResult DeleteSalesData(int id)
         {
-            SalesData salesData = db.SalesData.Find(id);
-            if (salesData == null)
+            IEnumerable<SalesData> salesData = db.SalesData.Where(e => e.Sales_ID == id);
+            if (salesData.Any())
             {
                 return NotFound();
             }
-
-            db.SalesData.Remove(salesData);
+            foreach(SalesData data in salesData)
+                db.SalesData.Remove(data);
             db.SaveChanges();
 
             return Ok(salesData);
