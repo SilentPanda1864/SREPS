@@ -1,0 +1,6 @@
+﻿TODO:
+
+1. send updates on update button click
+2. Add prices support
+3. Generate monthly and weekly sales in right hand module
+
