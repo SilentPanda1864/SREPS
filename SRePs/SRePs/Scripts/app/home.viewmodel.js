@@ -58,7 +58,6 @@ $(document).ready(function() {
 		}
 		//viewing data
 		self.getDataFromId = function (id) {
-			alert(id);
 			$.getJSON("api/salesdata/"+id,
 				function (data) {
 					self.individualSale(data);
@@ -70,7 +69,6 @@ $(document).ready(function() {
 		self.saleData = ko.observableArray();
 		self.addNewReport = function () {
 			var json = ko.toJSON(self.saleData());
-			console.log(json);
 			$.ajax({
 				url: "api/salesdata",
 				type: "POST",
@@ -94,8 +92,15 @@ $(document).ready(function() {
 				}
 			}
 			self.addNewReport();
+			//reset modal data
+			names[0]["value"] = "";
+			amounts[0]["value"] = 1;
+			for (count = 1; count < names.length; count++) {
+				names[count].remove();
+				amounts[count].remove();
+			}
+			$("#addReportModal").modal('hide');
 			self.getData();
-			//TODO: update modal elements
 		}
 
 	}
