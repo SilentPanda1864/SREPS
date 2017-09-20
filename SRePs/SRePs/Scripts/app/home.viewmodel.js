@@ -26,10 +26,10 @@ $(document).ready(function() {
 
 	function SalesModel() {
 		var self = this;
-		//Getting data
 		self.salesRecords = ko.observableArray();
 		self.ids = ko.observableArray();
 		self.individualSale = ko.observableArray();
+		//Get data
 		self.getData = function() {
 			$.getJSON("api/salesdata",
 				function (data) {
@@ -46,8 +46,19 @@ $(document).ready(function() {
 
 				});
 		}
+		//Deleting data
+		self.deleteSalesId = function(id) {
+			$.ajax({
+				url: '/api/salesdata/' + id,
+				type: 'DELETE',
+				success: function(result) {
+					self.getData();
+				}
+			});
+		}
 		//viewing data
 		self.getDataFromId = function (id) {
+			alert(id);
 			$.getJSON("api/salesdata/"+id,
 				function (data) {
 					self.individualSale(data);

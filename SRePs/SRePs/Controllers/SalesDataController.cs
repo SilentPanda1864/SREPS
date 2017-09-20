@@ -128,7 +128,7 @@ namespace SRePs.Controllers
         public IHttpActionResult DeleteSalesData(int id)
         {
             IEnumerable<SalesData> salesData = db.SalesData.Where(e => e.Sales_ID == id);
-            if (salesData.Any())
+            if (salesData.Count() == 0)
             {
                 return NotFound();
             }
