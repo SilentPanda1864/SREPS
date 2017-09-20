@@ -31,7 +31,7 @@
                                     <td data-bind="text: $data"></td>
                                     <td>
                                         <button data-toggle="modal" data-bind="click: $parent.getDataFromId" data-target="#viewModal"class="btn btn-info glyphicon glyphicon-eye-open"></button>
-                                        <button data-toggle="modal"class="btn btn-default glyphicon glyphicon-pencil"></button>
+                                        <button data-toggle="modal" data-bind="click: $parent.getDataFromId" data-target="#editModal" class="btn btn-default glyphicon glyphicon-pencil"></button>
                                         <button data-bind="click: $parent.deleteSalesId" class="btn btn-danger glyphicon glyphicon-trash"></button>
                                     </td>
                                     
@@ -52,37 +52,86 @@
             </div>
         </div>
     </div>
+
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="title-group">
+                    <span data-bind="if: individualSale().length >= 1"><h4 class="modal-title">Sales Report for Sale ID:<span data-bind="text: individualSale()[0].sales_ID"></span></h4></span>
+                    <button type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new item" class="addNewProduct btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+                </div>
+                </div>
+            <div class="modal-body">
+                <div data-bind="foreach: individualSale">
+                    <!--ko if: $index() == 0-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-control-label" for="inputProductName">Product Name</label>
+                            <input id="inputProductName" data-bind="value: product_Name"class="form-control"type="text" name="productName"/>
+                        </div>
+                        <div class="col-md-6 move-left">
+                            <label class="form-control-label" for="inputAmountSold">Amount Sold</label>
+                            <input id="inputAmountSold" data-bind="value: amount_Sold"class="form-control"type="number" name="amountSold" value="1"/>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!--ko if: $index() != 0-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-control-label" for="inputProductName">Product Name</label>
+                            <input id="inputProductName" data-bind="value: product_Name" class="form-control" type="text" name="productName"/>
+                        </div>
+                        <div class="col-md-4 move-left">
+                            <label class="form-control-label" for="inputAmountSold">Amount Sold</label>
+                            <input id="inputAmountSold" data-bind="value: amount_Sold" class="form-control" type="number" name="amountSold" value="1"/>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="remove_field btn btn-danger glyphicon glyphicon-trash" style="margin-top: 24px;"> </button>
+                        </div>
+                    </div>
+                    <!--/ko-->
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal -->
     <div id="viewModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <div class="modal-content">
-                <!--ko if: individualSale().length >= 1-->
+            <div class="modal-content" data-bind="if: individualSale().length >= 1">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Sales summary for sale ID:<span data-bind="text: individualSale()[0].sales_ID"></span></h4>
+                    <h4 class="modal-title">Sales Report for Sale ID:<span data-bind="text: individualSale()[0].sales_ID"></span></h4>
                 </div>
                 <div class="modal-body">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th>Product name</th>
-                                <th> Amount sold</th>
-                            </tr>
+                        <tr>
+                            <th>Product name</th>
+                            <th> Amount sold</th>
+                        </tr>
                         </thead>
                         <tbody data-bind="foreach: individualSale">
-                            <tr>
-                                <td data-bind="text: product_Name"></td>
-                                <td data-bind="text: amount_Sold"></td>
-                            </tr>
-                      </tbody>
+                        <tr>
+                            <td data-bind="text: product_Name"></td>
+                            <td data-bind="text: amount_Sold"></td>
+                        </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
-                <!-- /ko -->
+
             </div>
 
         </div>
@@ -97,8 +146,8 @@
                     <div class="title-group">
                         <h4 class="modal-title">Add new sales report</h4>
                         <input type="hidden" id="salesIdholder" value="" />
-                        <button type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new item" id="addNewProduct" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
-                   </div>
+                        <button type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new item"  class="addNewProduct btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -113,7 +162,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button data-bind="click: buildArray" type="submit" class ="btn btn-primary">Add report</button>
+                    <button data-bind="click: buildArray" type="submit" class ="btn btn-primary"  data-dismiss="modal">Add report</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -121,3 +170,4 @@
         </div>
     </div>
 </div>
+

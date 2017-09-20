@@ -15,7 +15,7 @@
     float: left;
     padding-right: 10px;
 }
-#addNewProduct {
+.addNewProduct {
     padding: 2px 5px 2px 5px;
 }
 .move-left {

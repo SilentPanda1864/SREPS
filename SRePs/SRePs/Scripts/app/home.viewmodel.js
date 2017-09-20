@@ -5,7 +5,7 @@ $(document).ready(function() {
 	//Additional field code
 	var max_fields = 10; //maximum input boxes allowed
 	var wrapper = $(".modal-body"); //Fields wrapper
-	var add_button = $("#addNewProduct"); //Add button ID
+	var add_button = $(".addNewProduct"); //Add button ID
 
 	var x = 1; //initlal text box count
 	$(add_button).click(function(e) { //on add input button click
@@ -19,9 +19,13 @@ $(document).ready(function() {
 			x++; //text box increment
 		}
 	});
-	$(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
-		e.preventDefault(); $(this).parent().parent().remove();
-	})
+	$(wrapper).on("click", ".remove_field",
+		function(e) { //user click on remove text
+			e.preventDefault();
+			console.log("call");
+			$(this).parent().parent().remove();
+			x--;
+		});
 });
 
 	function SalesModel() {
@@ -45,6 +49,9 @@ $(document).ready(function() {
 					}
 
 				});
+		}
+		//Edit Data
+		self.editSalesRecord = function(id) {
 		}
 		//Deleting data
 		self.deleteSalesId = function(id) {
@@ -74,6 +81,7 @@ $(document).ready(function() {
 				type: "POST",
 				data: json,
 				contentType: "application/json; charset=utf-8",
+				async: false,
 				success: function (result) {
 					if (result.url) {
 						location.href = result.url;
@@ -99,7 +107,6 @@ $(document).ready(function() {
 				names[count].remove();
 				amounts[count].remove();
 			}
-			$("#addReportModal").modal('hide');
 			self.getData();
 		}
 
