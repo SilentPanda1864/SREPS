@@ -1,7 +1,31 @@
 ﻿//Add additional text boxes
 $(document).ready(function() {
-	//Set popovers
+	//Set tooltips
 	$('[data-toggle="tooltip"]').tooltip();
+	//handle modals on close
+	$('#editModal').on('hidden.bs.modal',
+		function() {
+			var names = $('#editModal .modal-body input[type="text"]');
+			var amounts = $('#editModal .modal-body input[type="number"]');
+			for (count = 0; count < names.length; count++) {
+				if (names[count]["value"] === "" && amounts[count]["value"] >= 1) {
+					$(names[count]).parent().parent().remove();
+				}
+			}
+		});
+	$('#addReportModal').on('hidden.bs.modal',
+		function () {
+			//reset fields to default
+			var names = $('#addReportModal .modal-body input[type="text"]');
+			var amounts = $('#addReportModal .modal-body input[type="number"]');
+			//reset modal data
+			names[0]["value"] = "";
+			amounts[0]["value"] = 1;
+			for (count = 1; count < names.length; count++) {
+				$(names[count]).parent().parent().remove();
+			}
+
+		});
 	//Additional field code
 	var max_fields = 10; //maximum input boxes allowed
 	var wrapper = $(".modal-body"); //Fields wrapper
@@ -22,7 +46,6 @@ $(document).ready(function() {
 	$(wrapper).on("click", ".remove_field",
 		function(e) { //user click on remove text
 			e.preventDefault();
-			console.log("call");
 			$(this).parent().parent().remove();
 			x--;
 		});
@@ -100,13 +123,6 @@ $(document).ready(function() {
 				}
 			}
 			self.addNewReport();
-			//reset modal data
-			names[0]["value"] = "";
-			amounts[0]["value"] = 1;
-			for (count = 1; count < names.length; count++) {
-				names[count].remove();
-				amounts[count].remove();
-			}
 			self.getData();
 		}
 
