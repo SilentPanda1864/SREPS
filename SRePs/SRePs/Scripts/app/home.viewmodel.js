@@ -76,7 +76,6 @@ $(document).ready(function() {
 				type: "POST",
 				data: json,
 				contentType: "application/json; charset=utf-8",
-				async: false,
 				success: function (result) {
 					if (result.url) {
 						location.href = result.url;
