@@ -62,7 +62,6 @@ $(document).ready(function() {
 			$.getJSON("api/salesdata/"+id,
 				function (data) {
 					self.individualSale(data);
-					console.log(self.individualSale());
 				});
 		}
 		self.getData();
