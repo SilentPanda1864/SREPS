@@ -143,10 +143,10 @@ $(document).ready(function() {
 			var sales_id = $('#currentId').val();
 			var names = $('#editModal .modal-body input[type="text"]');
 			var amounts = $('#editModal .modal-body input[type="number"]');
-
+			var prices = $('#editModal .price');
 			if (names.length >= 1) {
 				for (count = 0; count < names.length; count++) {
-					self.updatedSalesData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[0]["value"] });
+					self.updatedSalesData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[0]["value"], price: prices[count]["value"]  });
 
 				}
 			}

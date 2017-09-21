@@ -73,21 +73,29 @@
                             <label class="form-control-label" for="inputProductName">Product Name</label>
                             <input id="inputProductName" data-bind="value: product_Name"class="form-control"type="text" name="productName"/>
                         </div>
-                        <div class="col-md-6 move-left">
+                        <div class="col-md-4 move-left">
                             <label class="form-control-label" for="inputAmountSold">Amount Sold</label>
                             <input id="inputAmountSold" data-bind="value: amount_Sold"class="form-control"type="number" name="amountSold" value="1"/>
+                        </div>
+                        <div class="col-md-2 move-left">
+                            <label class="form-control-label" for="inputAmountSold">Price</label>
+                            <input id="inputAmountSold" data-bind="value: price" class="price form-control" type="number" name="amountSold" value="1" step="0.01" />
                         </div>
                     </div>
                     <!-- /ko -->
                     <!--ko if: $index() != 0-->
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="form-control-label" for="inputProductName">Product Name</label>
                             <input id="inputProductName" data-bind="value: product_Name" class="form-control" type="text" name="productName"/>
                         </div>
                         <div class="col-md-4 move-left">
                             <label class="form-control-label" for="inputAmountSold">Amount Sold</label>
                             <input id="inputAmountSold" data-bind="value: amount_Sold" class="form-control" type="number" name="amountSold" value="1"/>
+                        </div>
+                        <div class="col-md-2 move-left">
+                            <label class="form-control-label" for="inputAmountSold">Price</label>
+                            <input id="inputAmountSold" data-bind="value: price" class="price form-control" type="number" name="amountSold" value="1" step="0.01" />
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="remove_field btn btn-danger glyphicon glyphicon-trash" style="margin-top: 24px;"> </button>
