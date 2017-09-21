@@ -36,10 +36,10 @@ $(document).ready(function() {
 		e.preventDefault();
 		if (x < max_fields) { //max input box allowed
 			$(wrapper).append(
-				'<div class="row"><div class="col-md-6"><label class="form-control-label" for="inputProductName">Product Name</label><input id="inputProductName"' +
+				'<div class="row"><div class="col-md-4"><label class="form-control-label" for="inputProductName">Product Name</label><input id="inputProductName"' +
 				'data-bind=\'value: productName' +
 				x +
-				'\' class="form-control" type="text" name="productName"/></div><div class="col-md-4 move-left"><label class="form-control-label" for="inputAmountSold">Amount Sold</label><input id="inputAmountSold" class="form-control" type="number" name="amountSold" value="1" /></div><div class="col-md-2"><button type="button" class="remove_field btn btn-danger glyphicon glyphicon-trash" style="margin-top:24px;"></div></div >'); //add input box
+				'\' class="form-control" type="text" name="productName"/></div><div class="col-md-4 move-left"><label class="form-control-label" for="inputAmountSold">Amount Sold</label><input id="inputAmountSold" class="amount form-control" type="number" name="amountSold" value="1" /></div><div class="col-md-2 move-left"><label class="form-control-label" for="inputPrice">Price</label><input id="inputPrice" class="price form-control" type="number" name="price" value="0.00" step="0.01"" /></div><div class="col-md-2"><button type="button" class="remove_field btn btn-danger glyphicon glyphicon-trash" style="margin-top:24px;"></div></div >'); //add input box
 			x++; //text box increment
 		}
 	});
@@ -127,10 +127,12 @@ $(document).ready(function() {
 		postData = function () {
 			var sales_id = $('#salesIdholder').val();
 			var names = $('#addReportModal .modal-body input[type="text"]');
-			var amounts = $('#addReportModal .modal-body input[type="number"]');
+			var amounts = $('#addReportModal .amount ');
+			var prices = $('#addReportModal .price');
+			console.log(prices[0]["value"]);
 			if (names.length >= 1) {
 				for (count = 0; count < names.length; count++) {
-					self.saleData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[0]["value"] });
+					self.saleData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[count]["value"], price: prices[count]["value"] });
 
 				}
 			}
@@ -141,6 +143,7 @@ $(document).ready(function() {
 			var sales_id = $('#currentId').val();
 			var names = $('#editModal .modal-body input[type="text"]');
 			var amounts = $('#editModal .modal-body input[type="number"]');
+
 			if (names.length >= 1) {
 				for (count = 0; count < names.length; count++) {
 					self.updatedSalesData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[0]["value"] });

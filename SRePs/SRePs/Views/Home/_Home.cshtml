@@ -119,12 +119,14 @@
                         <tr>
                             <th>Product name</th>
                             <th> Amount sold</th>
+                            <th>Price</th>
                         </tr>
                         </thead>
                         <tbody data-bind="foreach: individualSale">
                         <tr>
                             <td data-bind="text: product_Name"></td>
                             <td data-bind="text: amount_Sold"></td>
+                            <td data-bind="text: price"></td>
                         </tr>
                         </tbody>
                     </table>
@@ -156,9 +158,13 @@
                             <label class="form-control-label" for="inputProductName">Product Name</label>
                             <input id="inputProductName" class="form-control"type="text" name="productName"/>
                         </div>
-                        <div class="col-md-6 move-left">
+                        <div class="col-md-4 move-left">
                             <label class="form-control-label" for="inputAmountSold">Amount Sold</label>
-                            <input id="inputAmountSold" class="form-control"type="number" name="amountSold" value="1"/>
+                            <input id="inputAmountSold" class="amount form-control"type="number" name="amountSold" value="1"/>
+                        </div>
+                        <div class="col-md-2 move-left">
+                            <label class="form-control-label" for="inputPrice">Price</label>
+                            <input id="inputPrice" class="price form-control" type="number" name="price" value="0.0" step="0.01" />
                         </div>
                     </div>
                 </div>
