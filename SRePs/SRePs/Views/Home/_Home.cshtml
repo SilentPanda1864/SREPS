@@ -61,6 +61,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <div class="title-group">
                     <span data-bind="if: individualSale().length >= 1"><h4 class="modal-title">Sales Report for Sale ID:<span data-bind="text: individualSale()[0].sales_ID"></span></h4></span>
+                    <input type="hidden" id="currentId" value="" />
                     <button type="button" data-toggle="tooltip" data-placement="bottom" title="Add a new item" class="addNewProduct btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
                 </div>
                 </div>
@@ -96,7 +97,7 @@
                 </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Update</button>
+                    <button data-bind="click: updateData" type="button" class="btn btn-primary" data-dismiss="modal">Update</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -162,7 +163,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button data-bind="click: buildArray" type="submit" class ="btn btn-primary"  data-dismiss="modal">Add report</button>
+                    <button data-bind="click: postData" type="submit" class ="btn btn-primary"  data-dismiss="modal">Add report</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>

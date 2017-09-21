@@ -63,18 +63,14 @@ $(document).ready(function() {
 					self.salesRecords(data);
 					var family = data, ids = [...new Set(family.map(a => a.sales_ID))];
 					self.ids(ids);
-
 					if (data.length == 0) {
 						$('#salesIdholder').val(1);
 					} else {
 						var lastitemId = data[data.length - 1]["sales_ID"];
-						$('#salesIdholder').val(lastitemId+1);
+						$('#salesIdholder').val(lastitemId + 1);
+						console.log($('#salesIdholder').val());
 					}
-
 				});
-		}
-		//Edit Data
-		self.editSalesRecord = function(id) {
 		}
 		//Deleting data
 		self.deleteSalesId = function(id) {
@@ -91,7 +87,9 @@ $(document).ready(function() {
 			$.getJSON("api/salesdata/"+id,
 				function (data) {
 					self.individualSale(data);
+					$('#currentId').val(id);
 				});
+			
 		}
 		self.getData();
 
@@ -106,16 +104,29 @@ $(document).ready(function() {
 				contentType: "application/json; charset=utf-8",
 				async: false,
 				success: function (result) {
-					if (result.url) {
-						location.href = result.url;
-					}
+					self.saleData().pop();
 				}
 			});
 		};
-		buildArray = function () {
+		//Updating data
+		self.updatedSalesData = ko.observableArray();
+		self.ediSalesRecord = function (id) {
+			var json = ko.toJSON(self.updatedSalesData());
+			$.ajax({
+				url: "api/salesdata/"+id,
+				type: "PUT",
+				data: json,
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function (result) {
+					console.log("Updated data");
+				}
+			});
+		};
+		postData = function () {
 			var sales_id = $('#salesIdholder').val();
-			var names = $('.modal-body input[type="text"]');
-			var amounts = $('.modal-body input[type="number"]');
+			var names = $('#addReportModal .modal-body input[type="text"]');
+			var amounts = $('#addReportModal .modal-body input[type="number"]');
 			if (names.length >= 1) {
 				for (count = 0; count < names.length; count++) {
 					self.saleData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[0]["value"] });
@@ -123,6 +134,19 @@ $(document).ready(function() {
 				}
 			}
 			self.addNewReport();
+			self.getData();
+		}
+		updateData = function (id) {
+			var sales_id = $('#currentId').val();
+			var names = $('#editModal .modal-body input[type="text"]');
+			var amounts = $('#editModal .modal-body input[type="number"]');
+			if (names.length >= 1) {
+				for (count = 0; count < names.length; count++) {
+					self.updatedSalesData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[0]["value"] });
+
+				}
+			}
+			self.ediSalesRecord(sales_id);
 			self.getData();
 		}
 
