@@ -25,7 +25,7 @@ namespace SREPSDataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<SalesData> SalesData { get; set; }
-        public virtual DbSet<StockData> StockData { get; set; }
+        public virtual DbSet<SalesData> SalesDatas { get; set; }
+        public virtual DbSet<StockData> StockDatas { get; set; }
     }
 }

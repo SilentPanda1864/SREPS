@@ -104,7 +104,7 @@ $(document).ready(function() {
 				contentType: "application/json; charset=utf-8",
 				async: false,
 				success: function (result) {
-					self.saleData().pop();
+					self.saleData([]);
 				}
 			});
 		};
@@ -119,6 +119,7 @@ $(document).ready(function() {
 				contentType: "application/json; charset=utf-8",
 				async: false,
 				success: function (result) {
+					self.updatedSalesData([]);
 					console.log("Updated data");
 				}
 			});

@@ -21,14 +21,14 @@ namespace SRePs.Controllers
         // GET: api/SalesData
         public IQueryable<SalesData> GetSalesDatas()
         {
-            return db.SalesData;
+            return db.SalesDatas;
         }
 
         // GET: api/SalesData/5
         [ResponseType(typeof(SalesData))]
         public IHttpActionResult GetSalesData(int id)
         {
-            IEnumerable<SalesData> salesData = db.SalesData.Where(e => e.Sales_ID == id);
+            IEnumerable<SalesData> salesData = db.SalesDatas.Where(e => e.Sales_ID == id);
             if (salesData.Count() == 0)
             {
                 return NotFound();
@@ -46,16 +46,16 @@ namespace SRePs.Controllers
                 return BadRequest(ModelState);
             }
             //get all data
-            var result = db.SalesData.Where(e => e.Sales_ID == id);
+            var result = db.SalesDatas.Where(e => e.Sales_ID == id);
             //remove it
             foreach (SalesData oldData in result)
             {
-                db.SalesData.Remove(oldData);
+                db.SalesDatas.Remove(oldData);
             }
             //Add new data
             foreach (SalesData newData in saleData)
             {
-                db.SalesData.Add(newData);
+                db.SalesDatas.Add(newData);
             }
             db.SaveChanges();
 
@@ -71,7 +71,7 @@ namespace SRePs.Controllers
                 return BadRequest(ModelState);
             }
             foreach(SalesData data in salesData)
-                db.SalesData.Add(data);
+                db.SalesDatas.Add(data);
 
             try
             {
@@ -118,13 +118,13 @@ namespace SRePs.Controllers
         [ResponseType(typeof(SalesData))]
         public IHttpActionResult DeleteSalesData(int id)
         {
-            IEnumerable<SalesData> salesData = db.SalesData.Where(e => e.Sales_ID == id);
+            IEnumerable<SalesData> salesData = db.SalesDatas.Where(e => e.Sales_ID == id);
             if (salesData.Count() == 0)
             {
                 return NotFound();
             }
             foreach(SalesData data in salesData)
-                db.SalesData.Remove(data);
+                db.SalesDatas.Remove(data);
             db.SaveChanges();
 
             return Ok(salesData);
@@ -141,11 +141,11 @@ namespace SRePs.Controllers
 
         private bool SalesDataExists(int id, string name)
         {
-            return db.SalesData.Count(e => (e.Sales_ID == id && e.Product_Name == name)) > 0;
+            return db.SalesDatas.Count(e => (e.Sales_ID == id && e.Product_Name == name)) > 0;
         }
         private bool SalesDataExists(int id)
         {
-            return db.SalesData.Count(e => (e.Sales_ID == id)) > 0;
+            return db.SalesDatas.Count(e => (e.Sales_ID == id)) > 0;
         }
     }
 }

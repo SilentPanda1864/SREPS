@@ -16,8 +16,9 @@ namespace SREPSDataAccess
     {
         public int Sales_ID { get; set; }
         public int Amount_Sold { get; set; }
-        public Nullable<System.DateTime> Date_Sold { get; set; }
-        public Nullable<System.TimeSpan> Time_Sold { get; set; }
+        public string Date_Sold { get; set; }
+        public string Time_Sold { get; set; }
         public string Product_Name { get; set; }
+        public decimal Price { get; set; }
     }
 }

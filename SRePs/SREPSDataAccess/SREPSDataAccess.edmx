@@ -13,8 +13,9 @@
           <Property Name="Sales_ID" Type="int" Nullable="false" />
           <Property Name="Product_Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Amount_Sold" Type="int" Nullable="false" />
-          <Property Name="Date_Sold" Type="date" />
-          <Property Name="Time_Sold" Type="time" Precision="7" />
+          <Property Name="Date_Sold" Type="varchar" MaxLength="50" />
+          <Property Name="Time_Sold" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="StockData">
           <Key>
@@ -39,9 +40,10 @@
           </Key>
           <Property Name="Sales_ID" Type="Int32" Nullable="false" />
           <Property Name="Amount_Sold" Type="Int32" Nullable="false" />
-          <Property Name="Date_Sold" Type="DateTime" Precision="0" />
-          <Property Name="Time_Sold" Type="Time" Precision="7" />
+          <Property Name="Date_Sold" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Time_Sold" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Product_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="StockData">
           <Key>
@@ -64,6 +66,7 @@
           <EntitySetMapping Name="SalesDatas">
             <EntityTypeMapping TypeName="SREPSDBModel.SalesData">
               <MappingFragment StoreEntitySet="SalesData">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
                 <ScalarProperty Name="Sales_ID" ColumnName="Sales_ID" />
                 <ScalarProperty Name="Amount_Sold" ColumnName="Amount_Sold" />
