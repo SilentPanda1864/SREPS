@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -38,35 +39,25 @@ namespace SRePs.Controllers
 
         // PUT: api/SalesData/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSalesData(int id, SalesData salesData)
+        public IHttpActionResult PutSalesData(int id, SalesData[] saleData)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != salesData.Sales_ID)
+            //get all data
+            var result = db.SalesData.Where(e => e.Sales_ID == id);
+            //remove it
+            foreach (SalesData oldData in result)
             {
-                return BadRequest();
+                db.SalesData.Remove(oldData);
             }
-
-            db.Entry(salesData).State = EntityState.Modified;
-
-            try
+            //Add new data
+            foreach (SalesData newData in saleData)
             {
-                db.SaveChanges();
+                db.SalesData.Add(newData);
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SalesDataExists(id, ""))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -151,6 +142,10 @@ namespace SRePs.Controllers
         private bool SalesDataExists(int id, string name)
         {
             return db.SalesData.Count(e => (e.Sales_ID == id && e.Product_Name == name)) > 0;
+        }
+        private bool SalesDataExists(int id)
+        {
+            return db.SalesData.Count(e => (e.Sales_ID == id)) > 0;
         }
     }
 }
