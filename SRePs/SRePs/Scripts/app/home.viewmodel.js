@@ -56,6 +56,7 @@ $(document).ready(function() {
 		self.salesRecords = ko.observableArray();
 		self.ids = ko.observableArray();
 		self.individualSale = ko.observableArray();
+		self.grossSales = ko.observable();
 		//Get data
 		self.getData = function() {
 			$.getJSON("api/salesdata",
@@ -70,6 +71,11 @@ $(document).ready(function() {
 						$('#salesIdholder').val(lastitemId + 1);
 						console.log($('#salesIdholder').val());
 					}
+					total = 0;
+					for (count = 0; count < self.salesRecords().length; count++) {
+						total += self.salesRecords()[count].price;
+					}
+					self.grossSales(total.toFixed(2));
 				});
 		}
 		//Deleting data
@@ -132,7 +138,7 @@ $(document).ready(function() {
 			console.log(prices[0]["value"]);
 			if (names.length >= 1) {
 				for (count = 0; count < names.length; count++) {
-					self.saleData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[count]["value"], price: prices[count]["value"] });
+					self.saleData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[count]["value"], price: prices[count]["value"], time_sold: new Date().toLocaleTimeString(), date_sold: new Date().toLocaleDateString() });
 
 				}
 			}
