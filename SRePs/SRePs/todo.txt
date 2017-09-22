@@ -1,5 +1,8 @@
 ﻿TODO:
 
-2. Add prices support
-3. Generate monthly and weekly sales in right hand module
+1. Toggle for monthly data
+
+BUGS:
+
+Edit causes new sales records to glitch - reset on update click
 
