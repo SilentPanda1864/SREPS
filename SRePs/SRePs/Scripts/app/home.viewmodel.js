@@ -47,7 +47,6 @@ $(document).ready(function() {
                     '\' class="form-control" type="text" name="productName"/></div><div class="col-md-4 move-left"><label class="form-control-label" for="inputAmountSold">Amount Sold</label><input id="inputAmountSold" class="amount form-control" type="number" name="amountSold" value="1" /></div><div class="col-md-2 move-left"><label class="form-control-label" for="inputPrice">Price</label><input id="inputPrice" class="price form-control" type="number" name="price" value="0.00" step="0.01"" /></div><div class="col-md-2"><button type="button" class="remove_field btn btn-danger glyphicon glyphicon-trash" style="margin-top:24px;"></div></div >'); //add input box
                 x++; //text box increment
             } else if ($('#editModal').is(':visible')) {
-                console.log("working")
                 $('#editModal .modal-body').append(
                     '<div class="row"><div class="col-md-4"><label class="form-control-label" for="inputProductName">Product Name</label><input id="inputProductName"' +
                     'data-bind=\'value: productName' +
@@ -83,7 +82,7 @@ $(document).ready(function() {
 					} else {
 						var lastitemId = data[data.length - 1]["sales_ID"];
 						$('#salesIdholder').val(lastitemId + 1);
-						console.log($('#salesIdholder').val());
+
 					}
 					total = 0;
 					for (count = 0; count < self.salesRecords().length; count++) {
@@ -107,7 +106,7 @@ $(document).ready(function() {
 			$.getJSON("api/salesdata/"+id,
                 function (data) {
                     self.individualSale(data);
-                    console.log(self.individualSale())
+                    $('#currentId').val(id);
 				});
 			
 		}
@@ -117,7 +116,6 @@ $(document).ready(function() {
 		self.saleData = ko.observableArray();
 		self.addNewReport = function () {
             var json = ko.toJSON(self.saleData());
-            console.log(json)
 			$.ajax({
 				url: "api/salesdata",
 				type: "POST",
@@ -131,7 +129,7 @@ $(document).ready(function() {
 		};
 		//Updating data
 		self.updatedSalesData = ko.observableArray();
-		self.ediSalesRecord = function (id) {
+        self.ediSalesRecord = function (id) {
 			var json = ko.toJSON(self.updatedSalesData());
 			$.ajax({
 				url: "api/salesdata/"+id,
@@ -141,7 +139,6 @@ $(document).ready(function() {
 				async: false,
 				success: function (result) {
 					self.updatedSalesData([]);
-					console.log("Updated data");
 				}
 			});
 		};
@@ -150,10 +147,8 @@ $(document).ready(function() {
 			var names = $('#addReportModal .modal-body input[type="text"]');
 			var amounts = $('#addReportModal .amount ');
 			var prices = $('#addReportModal .price');
-			console.log(prices[0]["value"]);
 			if (names.length >= 1) {
                 for (count = 0; count < names.length; count++) {
-                    console.log(count);
 					self.saleData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[count]["value"], price: prices[count]["value"], time_sold: new Date().toLocaleTimeString(), date_sold: new Date().toLocaleDateString() });
 
 				}
@@ -162,7 +157,7 @@ $(document).ready(function() {
 			self.getData();
 		}
 		updateData = function (id) {
-			var sales_id = $('#currentId').val();
+            var sales_id = $('#currentId').val();
 			var names = $('#editModal .modal-body input[type="text"]');
 			var amounts = $('#editModal .modal-body input[type="number"]');
 			var prices = $('#editModal .price');
