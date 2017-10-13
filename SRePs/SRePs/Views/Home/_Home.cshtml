@@ -52,6 +52,10 @@
                     <h3 style="text-align: center" id="grossSalesAmount"data-bind="text: grossSales"></h3>
                 </div>
             </div>
+            <div class="panel weekly-monthly-sales">
+                <button data-toggle="modal" data-target="#modelWeeklySales" class="btn btn-info btn-weekly">Weekly Sales Totals</button>
+                <button data-toggle="modal" data-target="#modelMonthlySales" class="btn btn-info btn-monthly">Monthly Sales Totals</button>
+            </div>
         </div>
     </div>
 
@@ -149,6 +153,7 @@
 
         </div>
     </div>
+    <!-- Modal -->
     <div id="addReportModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -184,6 +189,70 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modelWeeklySales" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Weekly Sales Totals</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product name</th>
+                                <th> Amount sold</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: individualSale">
+                            <tr>
+                                <td data-bind="text: product_Name"></td>
+                                <td data-bind="text: amount_Sold"></td>
+                                <td data-bind="text: price"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modelMonthlySales" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Monthly Sales Totals</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product name</th>
+                                <th> Amount sold</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: individualSale">
+                            <tr>
+                                <td data-bind="text: product_Name"></td>
+                                <td data-bind="text: amount_Sold"></td>
+                                <td data-bind="text: price"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
