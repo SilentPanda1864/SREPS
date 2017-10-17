@@ -119,6 +119,7 @@
       <LastGenOutput>SREPSDataAccess.Context.cs</LastGenOutput>
       <DependentUpon>SREPSDataAccess.edmx</DependentUpon>
     </Content>
+    <Content Include="SREPSDataAccess.edmx.sql" />
     <Content Include="SREPSDataAccess.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SREPSDataAccess.edmx</DependentUpon>

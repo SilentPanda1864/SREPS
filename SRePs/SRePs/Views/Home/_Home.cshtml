@@ -200,6 +200,14 @@
                     <h4 class="modal-title">Sales Reports</h4>
                 </div>
                 <div class="modal-body">
+                    <!-- Date Selection -->
+                    <div class="date-selection">
+                        <label for="startDate">Start Date:</label>
+                        <input name="startDate" id="startDate" class="start-date-picker" type="date" />
+                        <label for="endDate">End Date:</label>
+                        <input name="endDate" id="endDate" class="end-date-picker" type="date" />
+                        <button type="button" class="btn btn-search" data-bind="click: getFilteredDates">Go</button>
+                    </div>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
