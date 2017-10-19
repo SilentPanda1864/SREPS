@@ -69,12 +69,13 @@ $(document).ready(function() {
 		self.salesRecords = ko.observableArray();
 		self.ids = ko.observableArray();
 		self.individualSale = ko.observableArray();
-		self.grossSales = ko.observable();
+        self.grossSales = ko.observable();
+        self.filteredSales = ko.observableArray();
 		//Get data
-		self.getData = function(callback) {
+		self.getData = function() {
 			$.getJSON("api/salesdata",
 				function (data) {
-					self.salesRecords(data);
+                    self.salesRecords(data);
 					var family = data, ids = [...new Set(family.map(a => a.sales_ID))];
 					self.ids(ids);
 					if (data.length == 0) {
@@ -83,28 +84,20 @@ $(document).ready(function() {
 						var lastitemId = data[data.length - 1]["sales_ID"];
 						$('#salesIdholder').val(lastitemId + 1);
 					}
-					total = 0;
+                    total = 0;                    
+                    var start = $('#startDate').val();
+                    var end = $('#endDate').val();
+                    var date_sold = new Date().toLocaleDateString()
 					for (count = 0; count < self.salesRecords().length; count++) {
-						total += self.salesRecords()[count].price;
+                        total += self.salesRecords()[count].price;
+                        if (self.salesRecords()[count].date_sold > start && self.salesRecords()[count].date_sold < end) {
+                            self.filteredSales.push(self.salesRecords()[count]);                            
+                        }
 					}
                     self.grossSales(total.toFixed(2));
-
-                    if (callback) {
-                        callback();
-                    }
 				});
         }
-
-        self.getFilteredDates = function () {
-            var start = $('#startDate').val();
-            var end = $('#endDate').val();
-            console.log('Dates', start, end);
-            var filtered = self.saleRecords().filter((record) => record.date_sold > start && record.date_sold < end);
-            for (count = 0; count < filtered.length; count++) {
-                self.getData();
-            }
-        }
-
+        
 		//Deleting data
 		self.deleteSalesId = function(id) {
 			$.ajax({
