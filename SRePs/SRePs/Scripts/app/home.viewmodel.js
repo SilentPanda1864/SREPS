@@ -2,6 +2,13 @@
 $(document).ready(function() {
 	//Set tooltips
 	$('[data-toggle="tooltip"]').tooltip();
+	$('#startDate').datepicker().on('changeDate', function(ev) {
+		$(this).datepicker('hide');
+	});
+	$('#endDate').datepicker().on('changeDate',
+		function(ev) {
+			$(this).datepicker('hide');
+	});
 	//handle modals on close
 	$('#editModal').on('hidden.bs.modal',
 		function() {

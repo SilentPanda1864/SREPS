@@ -45,8 +45,7 @@
         </div>
         <div class="col-md-4">
             <div class="panel panel-primary earnings">
-                <div class="panel-heading">Earnings <div class="checkbox" style="display: inline-block; margin-left: 120px;"><input type="checkbox" name="monthly" value="monthly" />Monthly</div>
-                </div>
+                <div class="panel-heading">Earnings</div>
                 <div class="panel-body">
                     <label for="startDate">Start Date:</label>
                     <div class="input-group">
@@ -58,10 +57,10 @@
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         <input type="text" class="form-control" id="endDate"placeholder="End Date">
                     </div>
-                    <div class="sales-reports">
-                        <button data-toggle="modal" data-target="#modalSalesReports" class="btn btn-info">View Total Sales Report</button>
+                    <div class="sales-reports text-center" style="margin-top: 15px; margin-bottom: 10px">
+                        <button data-toggle="modal" data-target="#modalSalesReports" class="btn btn-info">View Sales Report</button>
                     </div>
-                    <p>The weekly grossing total is:</p>
+                    <p class="text-center">The weekly grossing total is:</p>
                     <h3 style="text-align: center" id="grossSalesAmount"data-bind="text: grossSales"></h3>
                 </div>
             </div>
