@@ -1,14 +1,34 @@
 ﻿//Add additional text boxes
+filteredData = [];
+updateFilteredData = function (startDate, endDate) {
+	if (startDate === "" || endDate === "") return;
+	start = moment(startDate, "DD/MM/YYYY");
+	end = moment(endDate, "DD/MM/YYYY");
+	$.getJSON("api/salesdata",
+		function (data) {
+			for (i = 0; i < data.length; i++) {
+				current = moment(data[i].date_Sold, "DD/MM/YYYY");
+
+				if (current.isBetween(start, end, null, '[]')) {
+					filteredData.push(data[i]);
+				}
+			}
+			console.log(filteredData.length);
+		});
+}
 $(document).ready(function() {
 	//Set tooltips
 	$('[data-toggle="tooltip"]').tooltip();
 	$('#startDate').datepicker().on('changeDate', function(ev) {
 		$(this).datepicker('hide');
+		
+		updateFilteredData($('#startDate').val(),$('#endDate').val());
 	});
 	$('#endDate').datepicker().on('changeDate',
 		function(ev) {
 			$(this).datepicker('hide');
-	});
+			updateFilteredData($('#startDate').val(), $('#endDate').val());
+		});
 	//handle modals on close
 	$('#editModal').on('hidden.bs.modal',
 		function() {
@@ -92,18 +112,13 @@ $(document).ready(function() {
 						$('#salesIdholder').val(lastitemId + 1);
 					}
 					total = 0;
-					var start = $('#startDate').val();
-					var end = $('#endDate').val();
 					for (count = 0; count < self.salesRecords().length; count++) {
-						total += self.salesRecords()[count].price;
-						if (self.salesRecords()[count].date_sold >= start && self.salesRecords()[count].date_sold <= end) {
-							self.filteredSales.push(self.salesRecords()[count]);
-						}
+						
 					}
 					self.grossSales(total.toFixed(2));
 				});
 		};
-		
+
 		//Deleting data
 		self.deleteSalesId = function(id) {
 			$.ajax({
@@ -168,7 +183,7 @@ $(document).ready(function() {
 						amount_sold: amounts[count]["value"],
 						price: prices[count]["value"],
 						time_sold: new Date().toLocaleTimeString(),
-						date_sold: new Date().toLocaleDateString()
+						date_sold: moment().format("DD/MM/YYYY")
 				});
 
 				}

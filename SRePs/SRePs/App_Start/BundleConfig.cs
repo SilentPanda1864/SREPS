@@ -32,7 +32,8 @@ namespace SRePs
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js",
-                "~/Scripts/app/datepicker.js",
+                "~/Scripts/moment.js",
+                "~/Scripts/datepicker.js",
                 "~/Scripts/respond.js"));
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/datepicker.css",
