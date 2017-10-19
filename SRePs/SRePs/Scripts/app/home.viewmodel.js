@@ -75,16 +75,23 @@ $(document).ready(function() {
 		});
 });
 
-	function SalesModel() {
-		var self = this;
-		self.salesRecords = ko.observableArray();
-		self.ids = ko.observableArray();
-		self.individualSale = ko.observableArray();
-		self.grossSales = ko.observable();
-		self.filteredSales = ko.observableArray();
-		self.startDate = ko.observable();
-		self.endDate = ko.observable();
-		self.startDate.subscribe(function(value) {
+function SalesModel() {
+	var self = this;
+	self.salesRecords = ko.observableArray();
+	self.ids = ko.observableArray();
+	self.individualSale = ko.observableArray();
+	self.grossSales = ko.observable();
+	self.filteredSales = ko.observableArray();
+	self.startDate = ko.observable();
+	self.endDate = ko.observable();
+	self.checkData = function() {
+		if (self.filteredSales().length > 0) {
+			$("#modalSalesReports").modal("show");
+		}
+		console.log("called");
+	}
+
+self.startDate.subscribe(function(value) {
 			self.updateFilteredData();
 
 		});

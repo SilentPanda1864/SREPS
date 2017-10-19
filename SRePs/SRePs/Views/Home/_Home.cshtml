@@ -58,7 +58,7 @@
                         <input type="text" class="form-control" id="endDate"  data-bind="value: endDate, valueUpdate: 'blur'" placeholder="End Date">
                     </div>
                     <div class="sales-reports text-center" style="margin-top: 15px; margin-bottom: 10px">
-                        <button data-toggle="modal" data-target="#modalSalesReports" class="btn btn-info">View Sales Report</button>
+                        <button data-bind="click: checkData"data-target="#modalSalesReports" class="btn btn-info">View Sales Report</button>
                     </div>
                     <p class="text-center">Total sales for date period:</p>
                     <h3 style="text-align: center" id="grossSalesAmount"data-bind="text: grossSales"></h3>
@@ -232,6 +232,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Download CSV</button>
                     <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                 </div>
             </div>
