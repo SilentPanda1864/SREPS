@@ -232,7 +232,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Download CSV</button>
+                    <button type="button" data-bind="click: function(args) {downloadCSV({ filename: 'stock-data.csv' })}"class="btn btn-success">Download CSV</button>
                     <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                 </div>
             </div>
