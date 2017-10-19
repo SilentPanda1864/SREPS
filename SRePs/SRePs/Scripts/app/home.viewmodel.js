@@ -1,33 +1,17 @@
 ﻿//Add additional text boxes
-filteredData = [];
-updateFilteredData = function (startDate, endDate) {
-	if (startDate === "" || endDate === "") return;
-	start = moment(startDate, "DD/MM/YYYY");
-	end = moment(endDate, "DD/MM/YYYY");
-	$.getJSON("api/salesdata",
-		function (data) {
-			for (i = 0; i < data.length; i++) {
-				current = moment(data[i].date_Sold, "DD/MM/YYYY");
 
-				if (current.isBetween(start, end, null, '[]')) {
-					filteredData.push(data[i]);
-				}
-			}
-			console.log(filteredData.length);
-		});
-}
 $(document).ready(function() {
 	//Set tooltips
 	$('[data-toggle="tooltip"]').tooltip();
 	$('#startDate').datepicker().on('changeDate', function(ev) {
 		$(this).datepicker('hide');
 		
-		updateFilteredData($('#startDate').val(),$('#endDate').val());
+		//updateFilteredData($('#startDate').val(),$('#endDate').val());
 	});
 	$('#endDate').datepicker().on('changeDate',
 		function(ev) {
 			$(this).datepicker('hide');
-			updateFilteredData($('#startDate').val(), $('#endDate').val());
+			//updateFilteredData($('#startDate').val(), $('#endDate').val());
 		});
 	//handle modals on close
 	$('#editModal').on('hidden.bs.modal',
@@ -98,6 +82,39 @@ $(document).ready(function() {
 		self.individualSale = ko.observableArray();
 		self.grossSales = ko.observable();
 		self.filteredSales = ko.observableArray();
+		self.startDate = ko.observable();
+		self.endDate = ko.observable();
+		self.startDate.subscribe(function(value) {
+			self.updateFilteredData();
+
+		});
+		self.endDate.subscribe(function (value) {
+			self.updateFilteredData();
+
+		});
+		self.updateFilteredData = function() {
+			
+			start = moment($('#startDate').val(), "DD/MM/YYYY");
+			end = moment($('#endDate').val(), "DD/MM/YYYY");
+			if (!start.isValid() || !end.isValid()) return;
+			self.filteredSales([]);//Clear array so data doesnt compound.
+			$.getJSON("api/salesdata",
+				function(data) {
+					for (i = 0; i < data.length; i++) {
+						current = moment(data[i].date_Sold, "DD/MM/YYYY");
+						if (current.isBetween(start, end, null, '[]')) {
+							console.log(data[i]);
+							self.filteredSales.push(data[i]);
+						}
+					}
+					total = 0;
+							for (count = 0; count < self.filteredSales().length; count++) {
+								total += self.filteredSales()[count].price;
+		
+							}
+					self.grossSales(total.toFixed(2));
+				});
+		}
 		//Get data
 		self.getData = function() {
 			$.getJSON("api/salesdata",
@@ -111,11 +128,14 @@ $(document).ready(function() {
 						var lastitemId = data[data.length - 1]["sales_ID"];
 						$('#salesIdholder').val(lastitemId + 1);
 					}
+					//Added here for consistency
 					total = 0;
-					for (count = 0; count < self.salesRecords().length; count++) {
-						
+					for (count = 0; count < self.filteredSales().length; count++) {
+						total += self.filteredSales()[count].price;
+
 					}
 					self.grossSales(total.toFixed(2));
+					
 				});
 		};
 
