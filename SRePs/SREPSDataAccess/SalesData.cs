@@ -15,10 +15,10 @@ namespace SREPSDataAccess
     public partial class SalesData
     {
         public int Sales_ID { get; set; }
+        public string Product_Name { get; set; }
         public int Amount_Sold { get; set; }
         public string Date_Sold { get; set; }
         public string Time_Sold { get; set; }
-        public string Product_Name { get; set; }
         public decimal Price { get; set; }
     }
 }

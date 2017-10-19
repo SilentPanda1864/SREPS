@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/17/2017 21:01:01
--- Generated from EDMX file: M:\Code\SREPS\SRePs\SREPSDataAccess\SREPSDataAccess.edmx
+-- Date Created: 10/19/2017 18:47:55
+-- Generated from EDMX file: C:\Users\Ryan-PC\source\repos\SREPS\SRePs\SREPSDataAccess\SREPSDataAccess.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -22,12 +22,6 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[SalesDatas]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SalesDatas];
-GO
-IF OBJECT_ID(N'[dbo].[StockDatas]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[StockDatas];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables

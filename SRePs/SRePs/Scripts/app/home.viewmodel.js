@@ -6,8 +6,8 @@ $(document).ready(function() {
 	$('#editModal').on('hidden.bs.modal',
 		function() {
 			var names = $('#editModal .modal-body input[type="text"]');
-            var amounts = $('#editModal .modal-body input[type="number"]');
-            var prices = $('#editModal .price');
+			var amounts = $('#editModal .modal-body input[type="number"]');
+			var prices = $('#editModal .price');
 			for (count = 0; count < names.length; count++) {
 				if (names[count]["value"] === "" && amounts[count]["value"] >= 1 && prices[count] >= 0) {
 					$(names[count]).parent().parent().remove();
@@ -18,12 +18,12 @@ $(document).ready(function() {
 		function () {
 			//reset fields to default
 			var names = $('#addReportModal .modal-body input[type="text"]');
-            var amounts = $('#addReportModal .modal-body input[type="number"]');
-            var prices = $('#addReportModal .price');
+			var amounts = $('#addReportModal .modal-body input[type="number"]');
+			var prices = $('#addReportModal .price');
 			//reset modal data
 			names[0]["value"] = "";
-            amounts[0]["value"] = 1;
-            prices[0]["value"] = 0.00;
+			amounts[0]["value"] = 1;
+			prices[0]["value"] = 0.00;
 			for (count = 1; count < names.length; count++) {
 				$(names[count]).parent().parent().remove();
 			}
@@ -36,24 +36,24 @@ $(document).ready(function() {
 
 	var x = 1; //initlal text box count
 	$(add_button).click(function(e) { //on add input button click
-        e.preventDefault();
-        
-        if (x < max_fields) { //max input box allowed
-            if ($('#addReportModal').is(':visible')) {
-                $('#addReportModal .modal-body').append(
-                    '<div class="row"><div class="col-md-4"><label class="form-control-label" for="inputProductName">Product Name</label><input id="inputProductName"' +
-                    'data-bind=\'value: productName' +
-                    x +
-                    '\' class="form-control" type="text" name="productName"/></div><div class="col-md-4 move-left"><label class="form-control-label" for="inputAmountSold">Amount Sold</label><input id="inputAmountSold" class="amount form-control" type="number" name="amountSold" value="1" /></div><div class="col-md-2 move-left"><label class="form-control-label" for="inputPrice">Price</label><input id="inputPrice" class="price form-control" type="number" name="price" value="0.00" step="0.01"" /></div><div class="col-md-2"><button type="button" class="remove_field btn btn-danger glyphicon glyphicon-trash" style="margin-top:24px;"></div></div >'); //add input box
-                x++; //text box increment
-            } else if ($('#editModal').is(':visible')) {
-                $('#editModal .modal-body').append(
-                    '<div class="row"><div class="col-md-4"><label class="form-control-label" for="inputProductName">Product Name</label><input id="inputProductName"' +
-                    'data-bind=\'value: productName' +
-                    x +
-                    '\' class="form-control" type="text" name="productName"/></div><div class="col-md-4 move-left"><label class="form-control-label" for="inputAmountSold">Amount Sold</label><input id="inputAmountSold" class="amount form-control" type="number" name="amountSold" value="1" /></div><div class="col-md-2 move-left"><label class="form-control-label" for="inputPrice">Price</label><input id="inputPrice" class="price form-control" type="number" name="price" value="0.00" step="0.01"" /></div><div class="col-md-2"><button type="button" class="remove_field btn btn-danger glyphicon glyphicon-trash" style="margin-top:24px;"></div></div >'); //add input box
-                x++; //text box increment
-            }
+		e.preventDefault();
+		
+		if (x < max_fields) { //max input box allowed
+			if ($('#addReportModal').is(':visible')) {
+				$('#addReportModal .modal-body').append(
+					'<div class="row"><div class="col-md-4"><label class="form-control-label" for="inputProductName">Product Name</label><input id="inputProductName"' +
+					'data-bind=\'value: productName' +
+					x +
+					'\' class="form-control" type="text" name="productName"/></div><div class="col-md-4 move-left"><label class="form-control-label" for="inputAmountSold">Amount Sold</label><input id="inputAmountSold" class="amount form-control" type="number" name="amountSold" value="1" /></div><div class="col-md-2 move-left"><label class="form-control-label" for="inputPrice">Price</label><input id="inputPrice" class="price form-control" type="number" name="price" value="0.00" step="0.01"" /></div><div class="col-md-2"><button type="button" class="remove_field btn btn-danger glyphicon glyphicon-trash" style="margin-top:24px;"></div></div >'); //add input box
+				x++; //text box increment
+			} else if ($('#editModal').is(':visible')) {
+				$('#editModal .modal-body').append(
+					'<div class="row"><div class="col-md-4"><label class="form-control-label" for="inputProductName">Product Name</label><input id="inputProductName"' +
+					'data-bind=\'value: productName' +
+					x +
+					'\' class="form-control" type="text" name="productName"/></div><div class="col-md-4 move-left"><label class="form-control-label" for="inputAmountSold">Amount Sold</label><input id="inputAmountSold" class="amount form-control" type="number" name="amountSold" value="1" /></div><div class="col-md-2 move-left"><label class="form-control-label" for="inputPrice">Price</label><input id="inputPrice" class="price form-control" type="number" name="price" value="0.00" step="0.01"" /></div><div class="col-md-2"><button type="button" class="remove_field btn btn-danger glyphicon glyphicon-trash" style="margin-top:24px;"></div></div >'); //add input box
+				x++; //text box increment
+			}
 		}
 	});
 	$(wrapper).on("click", ".remove_field",
@@ -69,13 +69,13 @@ $(document).ready(function() {
 		self.salesRecords = ko.observableArray();
 		self.ids = ko.observableArray();
 		self.individualSale = ko.observableArray();
-        self.grossSales = ko.observable();
-        self.filteredSales = ko.observableArray();
+		self.grossSales = ko.observable();
+		self.filteredSales = ko.observableArray();
 		//Get data
 		self.getData = function() {
 			$.getJSON("api/salesdata",
-				function (data) {
-                    self.salesRecords(data);
+				function(data) {
+					self.salesRecords(data);
 					var family = data, ids = [...new Set(family.map(a => a.sales_ID))];
 					self.ids(ids);
 					if (data.length == 0) {
@@ -84,20 +84,19 @@ $(document).ready(function() {
 						var lastitemId = data[data.length - 1]["sales_ID"];
 						$('#salesIdholder').val(lastitemId + 1);
 					}
-                    total = 0;                    
-                    var start = $('#startDate').val();
-                    var end = $('#endDate').val();
-                    var date_sold = new Date().toLocaleDateString()
+					total = 0;
+					var start = $('#startDate').val();
+					var end = $('#endDate').val();
 					for (count = 0; count < self.salesRecords().length; count++) {
-                        total += self.salesRecords()[count].price;
-                        if (self.salesRecords()[count].date_sold > start && self.salesRecords()[count].date_sold < end) {
-                            self.filteredSales.push(self.salesRecords()[count]);                            
-                        }
+						total += self.salesRecords()[count].price;
+						if (self.salesRecords()[count].date_sold >= start && self.salesRecords()[count].date_sold <= end) {
+							self.filteredSales.push(self.salesRecords()[count]);
+						}
 					}
-                    self.grossSales(total.toFixed(2));
+					self.grossSales(total.toFixed(2));
 				});
-        }
-        
+		};
+		
 		//Deleting data
 		self.deleteSalesId = function(id) {
 			$.ajax({
@@ -107,22 +106,22 @@ $(document).ready(function() {
 					self.getData();
 				}
 			});
-		}
+		};
 		//viewing data
-		self.getDataFromId = function (id) {
-			$.getJSON("api/salesdata/"+id,
-                function (data) {
-                    self.individualSale(data);
-                    $('#currentId').val(id);
+		self.getDataFromId = function(id) {
+			$.getJSON("api/salesdata/" + id,
+				function(data) {
+					self.individualSale(data);
+					$('#currentId').val(id);
 				});
-			
-		}
+
+		};
 		self.getData();
 
 		//Posting data
 		self.saleData = ko.observableArray();
 		self.addNewReport = function () {
-            var json = ko.toJSON(self.saleData());
+			var json = ko.toJSON(self.saleData());
 			$.ajax({
 				url: "api/salesdata",
 				type: "POST",
@@ -136,7 +135,7 @@ $(document).ready(function() {
 		};
 		//Updating data
 		self.updatedSalesData = ko.observableArray();
-        self.ediSalesRecord = function (id) {
+		self.ediSalesRecord = function (id) {
 			var json = ko.toJSON(self.updatedSalesData());
 			$.ajax({
 				url: "api/salesdata/"+id,
@@ -149,34 +148,46 @@ $(document).ready(function() {
 				}
 			});
 		};
-		postData = function () {
+		postData = function() {
 			var sales_id = $('#salesIdholder').val();
 			var names = $('#addReportModal .modal-body input[type="text"]');
 			var amounts = $('#addReportModal .amount ');
 			var prices = $('#addReportModal .price');
 			if (names.length >= 1) {
-                for (count = 0; count < names.length; count++) {
-					self.saleData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[count]["value"], price: prices[count]["value"], time_sold: new Date().toLocaleTimeString(), date_sold: new Date().toLocaleDateString() });
+				for (count = 0; count < names.length; count++) {
+					self.saleData.push({
+						sales_ID: +sales_id,
+						product_name: names[count]["value"],
+						amount_sold: amounts[count]["value"],
+						price: prices[count]["value"],
+						time_sold: new Date().toLocaleTimeString(),
+						date_sold: new Date().toLocaleDateString()
+				});
 
 				}
 			}
 			self.addNewReport();
 			self.getData();
-		}
-		updateData = function (id) {
-            var sales_id = $('#currentId').val();
+		};
+		updateData = function(id) {
+			var sales_id = $('#currentId').val();
 			var names = $('#editModal .modal-body input[type="text"]');
 			var amounts = $('#editModal .modal-body input[type="number"]');
 			var prices = $('#editModal .price');
 			if (names.length >= 1) {
 				for (count = 0; count < names.length; count++) {
-					self.updatedSalesData.push({ sales_ID: +sales_id, product_name: names[count]["value"], amount_sold: amounts[0]["value"], price: prices[count]["value"]  });
+					self.updatedSalesData.push({
+						sales_ID: +sales_id,
+						product_name: names[count]["value"],
+						amount_sold: amounts[0]["value"],
+						price: prices[count]["value"]
+					});
 
 				}
 			}
 			self.ediSalesRecord(sales_id);
 			self.getData();
-		}
+		};
 
 	}
 
